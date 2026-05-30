@@ -2,7 +2,7 @@
 
 A community-maintained index of openly available **stimulus sets and study repositories for the Visual World Paradigm (VWP)**.
 
-**Live catalog:** https://USERNAME.github.io/vwp-catalog/
+**Live catalog:** https://vocaliodmiku.github.io/vwp-catalog/
 
 ## What this is
 
