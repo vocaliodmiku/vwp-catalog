@@ -1,0 +1,76 @@
+name: Submit a stimulus set
+description: Propose a new VWP stimulus set or study repository for the catalog
+title: "[New set]: "
+labels: ["new-entry"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing! One set per issue. We link out only — please submit sources that are openly accessible. Use "unknown"/"unclear" rather than guessing.
+  - type: input
+    id: name
+    attributes:
+      label: Name of the set
+    validations:
+      required: true
+  - type: input
+    id: citation
+    attributes:
+      label: Full citation
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: Source URL (where it lives)
+    validations:
+      required: true
+  - type: dropdown
+    id: competitor_type
+    attributes:
+      label: Competitor type
+      options:
+        - cohort
+        - rhyme
+        - cohort+rhyme
+        - semantic
+        - anticipatory
+        - none (image bank)
+        - methodological
+        - other
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language of materials
+    validations:
+      required: true
+  - type: dropdown
+    id: stimulus_modality
+    attributes:
+      label: Stimulus modality
+      options:
+        - line drawings
+        - object photos
+        - clipart scenes
+        - real objects
+        - mixed/other
+  - type: dropdown
+    id: eyetracking_data_included
+    attributes:
+      label: Are human eye-tracking data included?
+      options:
+        - "yes"
+        - "no"
+        - "unknown"
+  - type: input
+    id: license
+    attributes:
+      label: License of the source (write "unclear" if unsure)
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes (caveats, design details, usability)
