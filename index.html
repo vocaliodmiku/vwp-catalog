@@ -123,6 +123,8 @@
   .yes { color: var(--accent-2); font-weight: 600; }
   .no { color: var(--muted); }
   .lic { font-size: 0.68rem; }
+  .data a.data-yes { color: var(--accent-2); font-weight: 600; text-decoration: none; white-space: nowrap; border-bottom: 1px solid var(--accent-2); }
+  .data a.data-yes:hover { color: var(--accent); border-color: var(--accent); }
   .notes { font-size: 0.68rem; color: var(--muted); max-width: 34ch; }
   footer {
     max-width: 1200px; margin: 2rem auto 4rem; padding: 2rem;
@@ -171,6 +173,7 @@
         <th data-key="stimulus_modality" class="hide-sm">Modality <span class="arrow"></span></th>
         <th data-key="audio_included" class="hide-sm">Audio <span class="arrow"></span></th>
         <th data-key="eyetracking_data_included">Eye data <span class="arrow"></span></th>
+        <th data-key="data_url">Data <span class="arrow"></span></th>
         <th data-key="license">License <span class="arrow"></span></th>
         <th data-key="notes" class="hide-sm">Notes</th>
       </tr>
@@ -212,6 +215,12 @@ function yn(v) {
   return '<span class="no">—</span>';
 }
 
+function dataLink(v) {
+  if (/^https?:\/\//.test(v)) return '<a class="data-yes" href="' + v + '" target="_blank" rel="noopener">↓&nbsp;download</a>';
+  if (v) return '<span class="no" title="' + v.replace(/"/g, '&quot;') + '">—</span>';
+  return '<span class="no">—</span>';
+}
+
 function render(data) {
   const tb = document.getElementById('tbody');
   tb.innerHTML = data.map(r => `
@@ -223,6 +232,7 @@ function render(data) {
       <td class="hide-sm">${r.stimulus_modality}</td>
       <td class="hide-sm">${yn(r.audio_included)}</td>
       <td>${yn(r.eyetracking_data_included)}</td>
+      <td class="data">${dataLink(r.data_url)}</td>
       <td class="lic">${r.license}</td>
       <td class="notes hide-sm">${r.notes}</td>
     </tr>`).join('');
@@ -273,7 +283,7 @@ fetch('catalog.csv').then(r => r.text()).then(text => {
   populateSelect('language', 'language');
   applyFilters();
 }).catch(e => {
-  document.getElementById('tbody').innerHTML = '<tr><td colspan="9">Could not load catalog.csv — when running locally, serve over HTTP (e.g. <code>python -m http.server</code>) rather than opening the file directly.</td></tr>';
+  document.getElementById('tbody').innerHTML = '<tr><td colspan="10">Could not load catalog.csv — when running locally, serve over HTTP (e.g. <code>python -m http.server</code>) rather than opening the file directly.</td></tr>';
 });
 </script>
 </body>
